@@ -1,5 +1,6 @@
 package com.gdci;
 
+import com.gdci.payroll.PayrollService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,10 +34,21 @@ class PayrollServiceTest {
     }
 
     @Test
-    @DisplayName("calculateBonus returns 8% for salary above 1000000")
-    void calculateBonus_above1000000_returnsEightPercent() {
+    @DisplayName("calculateBonus returns 8% for salary between 1000000 and 2000000")
+    void calculateBonus_between1000000And2000000_returnsEightPercent() {
         double salary = 1500000;
         double expectedBonus = salary * 0.08;
+
+        double actualBonus = payrollService.calculateBonus(salary);
+
+        assertEquals(expectedBonus, actualBonus, 0.0001);
+    }
+
+    @Test
+    @DisplayName("calculateBonus returns 10% for salary above 2000000")
+    void calculateBonus_above2000000_returnsTenPercent() {
+        double salary = 2500000;
+        double expectedBonus = salary * 0.10;
 
         double actualBonus = payrollService.calculateBonus(salary);
 
